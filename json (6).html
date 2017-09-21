@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  
+ </head>
+  <script>
+var alumno = {
+ "nombre" : "Juan",
+ "edad" : 17,
+ "cursos": [
+   {
+     "codigo" : "A34",
+  	 "nombre" : "Algoritmos"
+   },
+   {
+     "codigo" : "B35",
+	  "nombre" : "Base de Datos"
+   },
+   {
+     "codigo" : "B36",
+    "nombre" : "Plataformas"
+   }
+ ],
+ "direccion" : {
+   "tipo": "Calle"
+ }
+};
+
+
+
+function verResultado() {
+  var out = document.getElementById("output");
+  var table = document.createElement("TABLE");
+  var trNombre = document.createElement("TR");
+  var trEdad = document.createElement("TR");
+  var trCursos = document.createElement("TR");
+  
+
+  table.border = "1";
+
+  var td1 = document.createElement("TD");
+  var td2 = document.createElement("TD");
+  td1.innerText = "Nombre:";
+
+  td2.innerText = alumno.nombre;
+  trNombre.appendChild(td1);
+  trNombre.appendChild(td2);
+
+  td1 = document.createElement("TD");
+  td2 = document.createElement("TD");
+  td1.innerText = "Edad:";
+  td2.innerText = alumno.edad;
+  trEdad.appendChild(td1);
+  trEdad.appendChild(td2);
+
+  td1 = document.createElement("TD");
+  td2 = document.createElement("TD");
+  td3=document.createElement("TD")
+  td1.innerText = "Cursos:";
+
+  var ulCursos = document.createElement("UL");
+  for (var i=0; i<alumno.cursos.length; i++) 
+  {
+	   var liCurso = document.createElement("LI");
+	   liCurso.innerHTML = alumno.cursos[i].nombre;
+	   ulCursos.appendChild(liCurso);
+	   liCurso.id = "curso-" + i;
+  }
+  td2.appendChild(ulCursos);
+  trCursos.appendChild(td1);
+  trCursos.appendChild(td2);
+  trCursos.appendChild(td3);
+
+  table.appendChild(trNombre);
+  table.appendChild(trEdad);
+  table.appendChild(trCursos);
+  out.innerHTML = "";
+  out.appendChild(table);
+}
+
+
+
+  function inicio(){
+       document.form.codigo.value = alumno.cursos[1].codigo;
+       document.form.nombre.value = alumno.cursos[1].nombre;
+    };
+    window.onload = inicio;
+
+   function guardar(){
+
+    alumno.cursos[1].codigo=document.form.codigo.value;
+    alumno.cursos[1].nombre=document.form.nombre.value;
+   } 
+
+
+  </script>
+ </head>
+
+ <body>
+   <button onclick="verResultado()">ver resultado</button>
+   <div id="output" style="margin: 10px; padding: 5px;">
+   </div>
+
+    <div class="modal-container">
+  <h2>Actualizar Cursos</h2>
+  <button onclick="document.getElementById('ventana').style.display='block'" class="modal-button modal-green modal-large">X</button>
+
+  <div id="ventana" class="modal-modal">
+    <div class="modal-modal-content modal-card-4 modal-animate-zoom" style="max-width:600px">
+
+      <div class="modal-center"><br>
+        <span onclick="document.getElementById('ventana').style.display='none'" class="modal-button modal-xlarge modal-hover-red modal-display-topright" title="Close Modal">&times;</span>
+     
+      </div>
+
+
+
+      <form class="modal-container" name="form" id="form" action="">
+        <div class="modal-section">
+          <label><b>Codigo</b></label>
+          <input class="modal-input modal-border modal-margin-bottom" 
+            type="text" name="codigo" id="codigo">
+
+
+          <label><b>Nombre</b></label>
+          <input class="modal-input modal-border" 
+          type="text" name="nombre" id="nombre" >
+
+          <button class="modal-button modal-block modal-green modal-section modal-padding" type="submit" onclick="guardar()">Guardar</button>
+
+          <button onclick="document.getElementById('ventana').style.display='none'" type="button" 
+          class="modal-button modal-block modal-green modal-section modal-padding">Cancelar</button>
+
+
+
+
+         
+        </div>
+      </form>
+
+      
+
+    </div>
+  </div>
+</div>
+
+  
+
+ </body>
+</html>
